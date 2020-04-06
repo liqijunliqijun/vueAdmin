@@ -1,14 +1,7 @@
 <template>
-  <div>
-    <!-- 头部面包屑 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>
-        <a href="/">活动管理</a>
-      </el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-    </el-breadcrumb>
+  <el-card>
+    <!-- 头部面包屑 --> 
+    <my-bread level1="角色管理" level2="角色列表"></my-bread>
     <!-- 搜索框  -->
     <el-row class="searchRow">
       <el-col class="searchCol">
@@ -31,13 +24,12 @@
       <el-table-column prop="email" label="邮箱"></el-table-column>
       <el-table-column prop="phone" label="电话"></el-table-column>
       <el-table-column label="创建时间">
-        <!-- 1.如果单元格里面显示的内容不是字符串（文本）需要被显示的内容外层包裹一个template
-        2.template 内部要用数据 设置slot-scope属性该属性的值是要用数据create_time的数据源 userList
-        3.solt-scope的值userList 其实就是 el-table 绑定的数据 userList
-            userList.row ->数组中的每个对象
+        <!--1.如果单元格里面显示的内容不是字符串（文本）需要被显示的内容外层包裹一个template
+            2.template 内部要用数据 设置slot-scope属性该属性的值是要用数据create_time的数据源 userList
+            3.solt-scope的值userList 其实就是 el-table 绑定的数据 userList
+            4.userList.row ->数组中的每个对象
         -->
-
-        <template slot-scope="tableData">{{ tableData.row.createTime |formatDate }}</template>
+        <template slot-scope="tableData">{{Number(tableData.row.createTime+'000') |formatDate }}</template>
       </el-table-column>
       <el-table-column label="用户状态">
         <template slot-scope="scop">
@@ -150,7 +142,7 @@
         <el-button type="primary" @click="userSwicthFnLogin()">确 定</el-button>
       </div>
     </el-dialog>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -188,7 +180,7 @@ export default {
           name: "王小虎",
           email: "admin@163.com",
           phone: "18122222222",
-          createTime: 15859893222,
+          createTime: 1515989322,
           ms_state: true,
           address: "上海市普陀区金沙江路 1518 弄"
         },
@@ -197,7 +189,7 @@ export default {
           name: "李巧茹",
           email: "admin@163.com",
           phone: "18122222222",
-          createTime: 1585989222,
+          createTime: 1525989222,
           ms_state: true,
           address: "上海市普陀区金沙江路 1518 弄"
         },
@@ -206,7 +198,7 @@ export default {
           name: "把加快",
           email: "admin@163.com",
           phone: "18122222222",
-          createTime: 1885989346,
+          createTime: 1485989346,
           ms_state: true,
           address: "上海市普陀区金沙江路 1518 弄"
         },
@@ -228,10 +220,7 @@ export default {
   methods: {
     // 获取 所有用户信息
     async getUserList() {
-      //  设置请求头，获取token
-      const AUTH_TOKEN = localStorage.getItem("token");
-      this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
-
+     
       const res = await this.$http.get(`users?query=${this.query}
         &pageNum=${this.pageNum}&pageSize=${this.pageSize}`);
       console.log(res);
@@ -377,7 +366,7 @@ export default {
 
 <style lang="scss" scoped>
 .searchRow {
-  padding-top: 20px;
+  padding-top: 0px;
 }
 
 .inputsearch {

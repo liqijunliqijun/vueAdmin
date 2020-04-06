@@ -1,13 +1,15 @@
 import Vue from 'vue'
-import router from 'vue-router' 
+import router from 'vue-router'
 
 import login from '@/components/login/login'
 import home from '@/components/home/home'
 import users from '@/components/users/users'
- 
+import purview from '@/components/purview/purview'
+import role from '@/components/role/role'
+
 
 Vue.use(router)
- 
+
 export default new router({
   routes: [
     {
@@ -19,14 +21,23 @@ export default new router({
       path: '/',
       name: 'home',
       component: home,
-      children:[
+      children: [
         {
-            path: 'users',
-            name: 'users',
-            component: users,
-        }
+          path: 'users',
+          name: 'users',
+          component: users,
+        },
+        {
+          path: '/purview',
+          name: 'purview',
+          component: purview,
+        }, {
+          path: '/role',
+          name: 'role',
+          component: role,
+        },
       ]
     },
-   
+
   ]
 })

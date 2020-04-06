@@ -126,13 +126,13 @@
               <span slot="title">权限管理</span>
             </template>
             <el-menu-item-group> 
-              <el-menu-item index="6-1">
+              <el-menu-item index="purview">
                 <i class="el-icon-location"></i>
-                <span slot="title">选项1</span>
+                <span slot="title">权限列表</span>
               </el-menu-item>
-              <el-menu-item index="6-2">
+              <el-menu-item index="role">
                 <i class="el-icon-location"></i>
-                <span slot="title">选项2</span>
+                <span slot="title">角色列表</span>
                 </el-menu-item>
             </el-menu-item-group>
             

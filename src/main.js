@@ -8,6 +8,11 @@ import moment from "moment"
 
 import '@/assets/css/index.scss'
 import 'element-ui/lib/theme-chalk/index.css'
+
+// 自定义的全局组件  MyBread 其实是组件选项所在的对象
+import MyBread from "@/components/curscom/myBread"
+Vue.component(MyBread.name,MyBread)
+
 Vue.use(axios)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
@@ -16,9 +21,6 @@ Vue.config.productionTip = false
 Vue.filter('formatDate',(v)=>{
   return moment(v).format('YYYY-MM-DD')
 });
-
- 
-
 
 new Vue({
   router,
