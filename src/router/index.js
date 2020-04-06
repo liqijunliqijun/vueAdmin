@@ -1,16 +1,17 @@
 import Vue from 'vue'
-import router from 'vue-router'
+import Router from 'vue-router'
 
 import login from '@/components/login/login'
 import home from '@/components/home/home'
 import users from '@/components/users/users'
 import purview from '@/components/purview/purview'
 import role from '@/components/role/role'
+import goods from '@/components/goods/goods'
 
 
-Vue.use(router)
+Vue.use(Router)
 
-export default new router({
+const router = new Router({
   routes: [
     {
       path: '/login',
@@ -31,13 +32,34 @@ export default new router({
           path: '/purview',
           name: 'purview',
           component: purview,
-        }, {
-          path: '/role',
-          name: 'role',
-          component: role,
         },
+        {
+         path: '/role',
+         name: 'role',
+         component: role,
+       },
+       {
+        path: '/goods',
+        name: 'goods',
+        component: goods,
+      },
       ]
     },
 
   ]
 })
+export default router
+// 在路由配置生效之前   统一判断token
+// 路由/导航 守卫 判断
+
+// router.beforeEnter((to, from, next) => {
+//   // ...
+//   console.log(to)
+// })
+
+
+
+
+
+
+

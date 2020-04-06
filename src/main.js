@@ -15,13 +15,14 @@ Vue.component(MyBread.name,MyBread)
 
 Vue.use(axios)
 Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 
 // 全局过滤器
 Vue.filter('formatDate',(v)=>{
   return moment(v).format('YYYY-MM-DD')
 });
-
+import {Message} from 'element-ui';
 new Vue({
   router,
   store,
@@ -33,16 +34,16 @@ new Vue({
 // to: Route: 即将要进入的目标 路由对象
 // from: Route: 当前导航正要离开的路由
 // next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
-// router.beforeEach((to,from,next)=>{
-//   if(to.path == '/login'){
-//     sessionStorage.removeItem("user")
-//   }
-//   var user =sessionStorage.getItem('user')
-//   if(!user && to.path !== '/login'){
-//     next({ 
-//         path:'/login' 
-//     })
-//   }else{
-//     next();
-//   }
-// })
+router.beforeEach((to,from,next)=>{ 
+  console.log(to)
+  if(to.path == '/login'){
+    localStorage.removeItem("token")
+  }
+  var token =localStorage.getItem('token')
+  if(!token && to.path !== '/login'){
+    Message.warning("请先登录")
+    next({   path:'/login'  })
+  }else{
+    next();
+  }
+})

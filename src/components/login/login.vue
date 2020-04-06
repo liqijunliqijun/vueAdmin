@@ -27,8 +27,9 @@ export default {
     methods:{
         handleLogin() {
             this.$message.success('登陆成功')
+            localStorage.setItem("token",'localStorage---token567')
             this.$router.push({ name: 'home' })
-            localStorage.setItem("token",',data.tokdfdsfdsfdsfe')
+
             this.$http.post("login",this.fromdata).then(res => {
             
                 //对象解构赋值

@@ -5,10 +5,9 @@
         <el-col class="col" :span="8">
           <div class="grid-content bg-purple">
             <img src="../../assets/img/logo.png" alt />
-            <el-radio-group v-model="isCollapse"
-             style="margin-bottom: 20px;" >
-                <el-radio-button :label="false">展开</el-radio-button>
-                <el-radio-button :label="true">收起</el-radio-button>
+            <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+              <el-radio-button :label="false">展开</el-radio-button>
+              <el-radio-button :label="true">收起</el-radio-button>
             </el-radio-group>
           </div>
         </el-col>
@@ -26,123 +25,36 @@
     </el-header>
     <el-container class="container">
       <el-aside class="left" width="isCollapse?'200px':'64px'">
-        <el-menu 
-            :router="true"
-          default-active="1-4-1"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-          :collapse="isCollapse" 
-          :unique-opened = "true"
-            >
-          <el-submenu index="1">
+       <!-- :unique-opened="true" 	是否只保持一个子菜单的展开 -->
+       <!-- collapse 	是否水平折叠收起菜单 -->
+        <el-menu
+        class="el-menu-vertical-demo" 
+        @open="handleOpen"
+         @close="handleClose"
+          :collapse="isCollapse"
+          :router="true"  
+          >
+          <el-submenu
+          v-for="(item1,i) in menus " :key="i"
+           :index="item1.order.toString()">
             <template slot="title">
               <i class="el-icon-menu"></i>
-              <span slot="title">用户列表</span>
+              <span slot="title">{{item1.authName}}</span>
             </template>
-            <el-menu-item-group> 
-              <el-menu-item index="users">
+             <el-menu-item-group>
+              <el-menu-item
+                v-for="(item2,i) in item1.children " :key="i"
+               :index="item2.path">
                 <i class="el-icon-location"></i>
-                <span slot="title">选项1</span>
+                <span slot="title">{{item2.authName}}</span>
               </el-menu-item>
-              <el-menu-item index="1-2">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项2</span>
-                </el-menu-item>
-            </el-menu-item-group>
-            
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span slot="title">添加商品</span>
-            </template>
-            <el-menu-item-group> 
-              <el-menu-item index="2-1">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项1</span>
-              </el-menu-item>
-              <el-menu-item index="2-2">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项2</span>
-                </el-menu-item>
-            </el-menu-item-group>
-            
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span slot="title">商品管理</span>
-            </template>
-            <el-menu-item-group> 
-              <el-menu-item index="3-1">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项1</span>
-              </el-menu-item>
-              <el-menu-item index="3-2">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项2</span>
-                </el-menu-item>
-            </el-menu-item-group>
-            
-          </el-submenu>
-          <el-submenu index="4">
-            <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span slot="title">订单管理</span>
-            </template>
-            <el-menu-item-group> 
-              <el-menu-item index="4-1">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项1</span>
-              </el-menu-item>
-              <el-menu-item index="4-2">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项2</span>
-                </el-menu-item>
-            </el-menu-item-group>
-            
-          </el-submenu>
-          <el-submenu index="5">
-            <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span slot="title">会员管理</span>
-            </template>
-            <el-menu-item-group> 
-              <el-menu-item index="5-1">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项1</span>
-              </el-menu-item>
-              <el-menu-item index="5-2">
-                <i class="el-icon-location"></i>
-                <span slot="title">选项2</span>
-                </el-menu-item>
-            </el-menu-item-group>
-            
-          </el-submenu>
-          <el-submenu index="6">
-            <template slot="title">
-               <i class="el-icon-setting"></i>
-              <span slot="title">权限管理</span>
-            </template>
-            <el-menu-item-group> 
-              <el-menu-item index="purview">
-                <i class="el-icon-location"></i>
-                <span slot="title">权限列表</span>
-              </el-menu-item>
-              <el-menu-item index="role">
-                <i class="el-icon-location"></i>
-                <span slot="title">角色列表</span>
-                </el-menu-item>
-            </el-menu-item-group>
-            
-          </el-submenu>
-          
+               </el-menu-item-group>
+            </el-submenu>
         </el-menu>
       </el-aside>
       <el-container class="right">
         <el-main class="main">
-            <router-view></router-view>
+          <router-view></router-view>
         </el-main>
         <el-footer class="footer">Footer</el-footer>
       </el-container>
@@ -154,29 +66,139 @@
 export default {
   data() {
     return {
-      isCollapse: false, 
+      isCollapse: false,
+      menus:[
+        {
+          authName:"用户管理",
+          id:125,
+          order:1,
+          path:"users",
+          children:[
+            {
+              authName:"用户列表",
+              id:110,
+              order:null,
+              path:"users",
+            }
+          ]
+        },
+        {
+          authName:"商品管理",
+          id:126,
+          order:2,
+          path:"goods",
+          children:[
+            {
+              authName:"添加商品",
+              id:120,
+              order:null,
+              path:"goods",
+            },
+            {
+              authName:"删除商品",
+              id:122,
+              order:null,
+              path:"goods",
+            },
+            {
+              authName:"商品分类",
+              id:123,
+              order:null,
+              path:"goods",
+            },
+           
+          ]
+        },
+        {
+          authName:"订单管理",
+          id:127,
+          order:3,
+          path:"orders",
+          children:[
+            {
+              authName:"用户管理",
+              id:125,
+              order:null,
+              path:"users",
+            },
+            {
+              authName:"用户管理",
+              id:125,
+              order:null,
+              path:"users",
+            }
+          ]
+        },
+        {
+          authName:"数据管理",
+          id:128,
+          order:4,
+          path:"erports",
+          children:[
+            {
+              authName:"用户数据",
+              id:125,
+              order:null,
+              path:"users",
+            },
+            {
+              authName:"数据图表",
+              id:125,
+              order:null,
+              path:"users",
+            }
+          ]
+        },
+        {
+          authName:"权限管理",
+          id:129,
+          order:5,
+          path:"purview",
+          children:[
+            {
+              authName:"角色列表",
+              id:151,
+              order:null,
+              path:"purview",
+            },
+            {
+              authName:"权限管理",
+              id:152,
+              order:null,
+              path:"role",
+            }
+          ]
+        },
+        
+      ]
     };
   },
-  beforeCreate (){
-      const token = localStorage.getItem('token')
-      if(!token){
-          this.$router.push({ name: "login" })
-      }
+  beforeCreate() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      this.$router.push({ name: "login" });
+    }
   },
 
-     methods: {
-       closeBtn (){
-           localStorage.clear()
-           this.$message.success("退出成功")
-           this.$router.push({ name:"login" })
-       },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
+  methods: {
+    // 获取 导航数据
+    async getMenus(){
+      const res = await this.$http.get(`menus`)
+      this.menus -= res.data.data;
+
+    },
+    closeBtn() {
+      localStorage.clear();
+      this.$message.success("退出成功");
+      this.$router.push({ name: "login" });
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     }
+  }
 };
 </script>
 
@@ -218,8 +240,8 @@ export default {
   height: 100%;
   display: inline-block;
 }
- .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 100%;
-  }
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 100%;
+}
 </style>
