@@ -6,7 +6,10 @@ import home from '@/components/home/home'
 import users from '@/components/users/users'
 import purview from '@/components/purview/purview'
 import role from '@/components/role/role'
-import goods from '@/components/goods/goods'
+import goodsList from '@/components/goods/goodsList'
+import goodsAdd from '@/components/goods/goodsAdd'
+import goodsCat from '@/components/goods/goodsCat'
+import goodsPara from '@/components/goods/goodsPara'
 
 
 Vue.use(Router)
@@ -41,7 +44,22 @@ const router = new Router({
        {
         path: '/goods',
         name: 'goods',
-        component: goods,
+        component: goodsList,
+      },
+      {
+        path: '/add',
+        name: 'add',
+        component: goodsAdd, 
+      },
+      {
+        path: '/goodsCat',
+        name: 'goodsCat',
+        component: goodsCat,
+      },
+      {
+        path: '/goodsPara',
+        name: 'goodsPara',
+        component: goodsPara,
       },
       ]
     },

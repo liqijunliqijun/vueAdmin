@@ -25,7 +25,7 @@
     </el-header>
     <el-container class="container">
       <el-aside class="left" width="isCollapse?'200px':'64px'">
-       <!-- :unique-opened="true" 	是否只保持一个子菜单的展开 -->
+       <!-- " 	是否只保持一个子菜单的展开 -->
        <!-- collapse 	是否水平折叠收起菜单 -->
         <el-menu
         class="el-menu-vertical-demo" 
@@ -33,6 +33,7 @@
          @close="handleClose"
           :collapse="isCollapse"
           :router="true"  
+          :unique-opened="true"
           >
           <el-submenu
           v-for="(item1,i) in menus " :key="i"
@@ -89,22 +90,22 @@ export default {
           path:"goods",
           children:[
             {
-              authName:"添加商品",
+              authName:"商品管理",
               id:120,
               order:null,
               path:"goods",
             },
             {
-              authName:"删除商品",
+              authName:"分类参数",
               id:122,
               order:null,
-              path:"goods",
+              path:"goodsPara",
             },
             {
               authName:"商品分类",
               id:123,
               order:null,
-              path:"goods",
+              path:"goodsCat",
             },
            
           ]
@@ -172,14 +173,7 @@ export default {
         
       ]
     };
-  },
-  beforeCreate() {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      this.$router.push({ name: "login" });
-    }
-  },
-
+  }, 
   methods: {
     // 获取 导航数据
     async getMenus(){
@@ -219,6 +213,8 @@ export default {
       }
       .footer {
         background: rgb(78, 2, 199);
+        height: 40px !important;
+        line-height: 40px !important;
       }
     }
   }

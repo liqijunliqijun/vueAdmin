@@ -356,7 +356,17 @@ export default {
       // 1. 给操作的dom元素 设置ref 属性值   eg: ref = "txt"
       // 2. this.$refs.ref 属性值 .js 方法名  eg: this.$refs.txt.foucs()
     },
-    roleFn() {},
+    roleFn() {
+      class Arr extends Array{
+          constructor(){
+            super()
+          }
+        }
+          let arr1 = new Arr()
+          arr1.push('1')
+          console.log(arr1); 
+          console.log(Object.prototype)
+    },
     roleDeletFn() {}
   }
 };
