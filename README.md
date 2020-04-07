@@ -58,7 +58,4 @@ export default {
     quillEditor
   }
 }
-
-
-
  ```
