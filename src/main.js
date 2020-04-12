@@ -4,15 +4,19 @@ import router from './router'
 import store from './store'
 import axios from './plugins/http.js'
 import ElementUI  from 'element-ui'
-import moment from "moment"
+import moment from "moment" 
 
 import '@/assets/css/index.scss'
 import 'element-ui/lib/theme-chalk/index.css'
 
+　　　　　　　　　　　　  
+// 引入树形结构的组件 element-tree-grid
+import ElTreeGrid from　'element-tree-grid'
 // 自定义的全局组件  MyBread 其实是组件选项所在的对象
 import MyBread from "@/components/curscom/myBread"
-Vue.component(MyBread.name,MyBread)
 
+Vue.component(MyBread.name,MyBread)
+Vue.component(ElTreeGrid.name,ElTreeGrid)
 Vue.use(axios)
 Vue.use(ElementUI)
 

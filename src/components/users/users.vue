@@ -61,7 +61,7 @@
           ></el-button>
           <el-button
             size="mini"
-            @click="listDelet(scope.row.id)"
+            @click="listDelet(scope.row)"
             plain
             type="danger"
             icon="el-icon-delete"
@@ -269,29 +269,29 @@ export default {
       this.form = {};
     },
     // 添加新用户 线上数据请求方法
-    // async userAddFn() {
-    //   this.userAdd = false;   // 关闭对话框
-    //   const res = await this.$http.post(`users`, this.form);
-    //   const {
-    //     meta: { status, msg },
-    //     data
-    //   } = res.data;
-    //   if (status === 201) {
-    //     this.$message.success(msg);   // 提示成功
-    //     this.getUserList();      // 更新用户列表
-    //     this.form = {};      // 清空form文本狂
-    //     // for(let key in this,form){
-    //     //   if(this.form.hasOwnproperty(key)){
-    //     //     this.form[key] = ''
-    //     //   }
-    //     // }
-    //   }else{
-    //      this.$message.warning(msg);
-    //   }
-    // },
+    async userAddFn() {
+      this.userAdd = false;   // 关闭对话框
+      const res = await this.$http.post(`users`, this.form);
+      const {
+        meta: { status, msg },
+        data
+      } = res.data;
+      if (status === 201) {
+        this.$message.success(msg);   // 提示成功
+        this.getUserList();      // 更新用户列表
+        this.form = {};      // 清空form文本狂
+        // for(let key in this,form){
+        //   if(this.form.hasOwnproperty(key)){
+        //     this.form[key] = ''
+        //   }
+        // }
+      }else{
+         this.$message.warning(msg);
+      }
+    },
     // 删除用户
-    listDelet(userId) {
-      this.tableData.splice(userId, 1);
+    listDelet(row) {
+      this.tableData.splice(this.tableData.indexOf(row), 1);
       // this.$confirm('删除用户','提示',{
       //   confirmButtonText:'确定',
       //   cancelButtonText:'取消',
@@ -371,5 +371,6 @@ export default {
 
 .inputsearch {
   width: 50%;
+  margin-right: 40px;
 }
 </style>

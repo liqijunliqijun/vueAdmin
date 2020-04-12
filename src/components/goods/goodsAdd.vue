@@ -306,7 +306,7 @@ export default {
           );
           this.checkboxData = res.data.data;
         }
-      } else if (this.active_steps === "2") {
+      } else if (this.active_steps === "3") {
         // 获取商品 属性的  数据
         const res = await this.$http.get(
           `categories/${this.selectValue[2]}/attributes?sel=sul`
@@ -338,7 +338,7 @@ export default {
 
 <style lang="scss" scoped>
 .elCard {
-  // height: 100%;
+  height: 100%;
 }
 .alert {
   margin-bottom: 20px;
@@ -364,25 +364,5 @@ export default {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.elCacader {
-  width: 300px;
-}
-.el-tab-pane {
-  min-height: 400px;
-}
-.elFormIitem {
-  height: 350px;
-  overflow: auto;
-  display: block;
-  width: 100%;
-}
-.elFormIitem .el-form-item__content {
-  width: 100% !important;
-}
-.ql-editor {
-  height: 300px;
-}
-.quillEeditor {
-  height: 200px;
-}
+ 
 </style>

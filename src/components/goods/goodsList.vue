@@ -135,9 +135,25 @@ export default {
     };
   },
   methods:{
+   // 选择每页显示的条数
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.getGoodsList();
+    },
+    // 点击当前页 请求当前页数据
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.pagenum = val;
+      this.getGoodsList();
+    },
     //   添加商品
     addGoods(){
         this.$router.push({name:"add"})
+    },
+    // 获取产品列表数据
+    async getGoodsList(){
+        const res = await this.$http.get(`goods`)
     }
 
   }
@@ -146,7 +162,4 @@ export default {
 
 <style lang="scss" scoped>
 
-.inputsearch {
-  width: 50%;
-}
 </style>
