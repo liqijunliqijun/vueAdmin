@@ -172,7 +172,8 @@ export default {
         password: "",
         emil: "",
         id: "",
-        phone: ""
+        phone: "",
+        createTime:0
       },
       tableData: [
         {
@@ -324,6 +325,8 @@ export default {
     userEditFn() {
       // this.tableData[this.currentRow] = this.form
       //  this.$set(this.tableData, this.form.id, this.form ); 此方法有问题
+      
+      this.form.createTime = Math.round(new Date() / 1000);
       this.$set(this.tableData, this.currentRow, this.form);
       this.userEdit = false;
       this.$message.success("修改成功");

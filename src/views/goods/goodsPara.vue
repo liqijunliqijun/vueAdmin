@@ -121,12 +121,12 @@
       <el-form :model="moveform">
         <el-form-item label="属性id" :label-width="formLabelWidth">
           <el-input v-model="moveform.id" disabled autocomplete="off"></el-input>
-        </el-form-item> 
+        </el-form-item>
         <el-form-item label="属性名" :label-width="formLabelWidth">
           <el-input v-model="moveform.name" autocomplete="off"></el-input>
-        </el-form-item> 
+        </el-form-item>
         <el-form-item label="属性" :label-width="formLabelWidth" type="expand">
-          <template >
+          <template>
             <el-tag
               :key="tag"
               v-for="tag in moveform.attr_vals"
@@ -143,8 +143,13 @@
               @keyup.enter.native="movehandleInputConfirm()"
               @blur="movehandleInputConfirm()"
             ></el-input>
-            <el-button v-else class="button-new-tag" type="success" size="small"
-             @click="showInput">+ 点击添加</el-button>
+            <el-button
+              v-else
+              class="button-new-tag"
+              type="success"
+              size="small"
+              @click="showInput"
+            >+ 点击添加</el-button>
           </template>
         </el-form-item>
       </el-form>
@@ -158,12 +163,12 @@
       <el-form :model="moveformEdit">
         <el-form-item label="属性id" :label-width="formLabelWidth">
           <el-input v-model="moveformEdit.id" disabled autocomplete="off"></el-input>
-        </el-form-item> 
+        </el-form-item>
         <el-form-item label="属性名" :label-width="formLabelWidth">
           <el-input v-model="moveformEdit.name" autocomplete="off"></el-input>
-        </el-form-item> 
+        </el-form-item>
         <el-form-item label="属性" :label-width="formLabelWidth" type="expand">
-          <template >
+          <template>
             <el-tag
               :key="tag"
               v-for="tag in moveformEdit.attr_vals"
@@ -180,8 +185,13 @@
               @keyup.enter.native="handMoveEditAttrsFn()"
               @blur="handMoveEditAttrsFn()"
             ></el-input>
-            <el-button v-else class="button-new-tag" type="success" size="small"
-             @click="showInput">+ 点击添加</el-button>
+            <el-button
+              v-else
+              class="button-new-tag"
+              type="success"
+              size="small"
+              @click="showInput"
+            >+ 点击添加</el-button>
           </template>
         </el-form-item>
       </el-form>
@@ -286,7 +296,7 @@ export default {
       ],
       activeName: "first",
       formLabelWidth: "100px",
-         inputVisible: false,
+      inputVisible: false,
       // 动态参数 列表
       tableData: [
         {
@@ -315,19 +325,18 @@ export default {
         }
       ],
       form: {},
-      isMove:false,
-      isMoveEdit: false, 
-      moveinputValue:'', 
-      moveformEdit:{
-          id:'',
-            name:'', 
-            attr_vals:[]
-      }, //单击修改 弹出当前 属性数据 
+      isMove: false,
+      isMoveEdit: false,
+      moveinputValue: "",
+      moveformEdit: {
+        id: "",
+        name: "",
+        attr_vals: []
+      }, //单击修改 弹出当前 属性数据
       moveform: {
-              id:'',
-            name:'', 
-            attr_vals:[]
-        
+        id: "",
+        name: "",
+        attr_vals: []
       },
       // 静态参数
       attributes: [
@@ -351,35 +360,34 @@ export default {
           attributes_text: "广汇股份撒旦",
           id: "326"
         }
-      ], 
+      ],
       inputValue: ""
     };
   },
   methods: {
     //添加动态数据
-    addMoverInfo () {
+    addMoverInfo() {
       this.isMove = true;
-      this.moveform.id = this.tableData.length+1;
+      this.moveform.id = this.tableData.length + 1;
     },
-    movehandleInputConfirm(){
-       let inputValue = this.moveinputValue;
-        if (inputValue) { 
-          this.moveform.attr_vals.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.moveinputValue = ''; 
-      console.log(this.moveform)
+    movehandleInputConfirm() {
+      let inputValue = this.moveinputValue;
+      if (inputValue) {
+        this.moveform.attr_vals.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.moveinputValue = "";
+      console.log(this.moveform);
     },
-    movehandleClose(tag){
-       this.moveform.attr_vals.splice(this.moveform.attr_vals.indexOf(tag), 1);
+    movehandleClose(tag) {
+      this.moveform.attr_vals.splice(this.moveform.attr_vals.indexOf(tag), 1);
     },
     // 提交 添加的参数
-    moveAddFn(){
-      this.tableData.push(this.moveform)
+    moveAddFn() {
+      this.tableData.push(this.moveform);
       this.isMove = false;
-      this.$message.success('添加成功')
+      this.$message.success("添加成功");
     },
-
 
     // 删除 角色属性
     listMoveDelet(row) {
@@ -387,46 +395,46 @@ export default {
       // 此处提交数据
       // .....
     },
- // 点击修改
-    listMoveEdit(row) { 
+    // 点击修改
+    listMoveEdit(row) {
       this.isMoveEdit = true;
-      this.moveformEdit = row; 
-      console.log("代理及修改",row)
+      this.moveformEdit = row;
+      console.log("代理及修改", row);
     },
-    moveEditAttrsFn(tag){
-         this.moveformEdit.attr_vals.splice(this.moveformEdit.attr_vals.indexOf(tag), 1);
-        console.log("删除",this.moveformEdit)
+    moveEditAttrsFn(tag) {
+      this.moveformEdit.attr_vals.splice(
+        this.moveformEdit.attr_vals.indexOf(tag),
+        1
+      );
+      console.log("删除", this.moveformEdit);
     },
-    handMoveEditAttrsFn(){
-       let inputValue = this.moveinputValue;
-        if (inputValue) { 
-          this.moveformEdit.attr_vals.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.moveinputValue = ''; 
-        console.log("回车视角",this.moveformEdit)
+    handMoveEditAttrsFn() {
+      let inputValue = this.moveinputValue;
+      if (inputValue) {
+        this.moveformEdit.attr_vals.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.moveinputValue = "";
+      console.log("回车视角", this.moveformEdit);
     },
     // 修改  提交
-    moveEditFn(row){
+    moveEditFn(row) {
       // this.tableData.indexOf(row.id)=this.moveformEdit;
-      let index = this.tableData.indexOf(row)
-          console.log(index)
-          console.log(row)
-          console.log("提交",this.moveformEdit.id)
-          if(this.tableData instanceof Array){
-             this.tableData.map((i) =>{
-            if(i.id*1 == this.moveformEdit.id){
-              i = {...this.moveformEdit};
-            }
-          })
-          } 
-          this.$message.success("修改成功")
-           this.isMoveEdit = false;
+      let index = this.tableData.indexOf(row);
+      console.log(index);
+      console.log(row);
+      console.log("提交", this.moveformEdit.id);
+      if (this.tableData instanceof Array) {
+        this.tableData.map(i => {
+          if (i.id * 1 == this.moveformEdit.id) {
+            i = { ...this.moveformEdit };
+          }
+        });
+      }
+      this.$message.success("修改成功");
+      this.isMoveEdit = false;
     },
 
-
-
-    
     //点击 X按钮
     async handleClose(row, tag) {
       row.attr_vals.splice(row.attr_vals.indexOf(tag), 1);
@@ -455,7 +463,7 @@ export default {
     // 回车 失去焦点  提交修改的数据
     async handleInputConfirm(row) {
       let inputValue = this.inputValue;
-      console.log(row)
+      console.log(row);
       if (inputValue) {
         row.attr_vals.push(inputValue);
       }

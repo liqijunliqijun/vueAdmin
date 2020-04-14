@@ -10,18 +10,23 @@
         :collapse="isCollapse"
         :router="true"
         :unique-opened="true"
+           default-active="1-1"
       >
         <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
           <el-radio-button :label="false">展开</el-radio-button>
           <el-radio-button :label="true">收起</el-radio-button>
         </el-radio-group>
-         <span
-            class="iconfont icon-nav toggleNavCollapse"
-            :class="{active:isSidebarNavCollapse}"
-            @click="toggleNavCollapse"
+        <span
+          class="iconfont icon-nav toggleNavCollapse"
+          :class="{active:isSidebarNavCollapse}"
+          @click="toggleNavCollapse"
+        ></span>
+        <el-submenu
+          v-for="(item1,i) in menus "
+        
+          :key="i"
+          :index="item1.order.toString()" 
         >
-        </span>
-        <el-submenu v-for="(item1,i) in menus " :key="i" :index="item1.order.toString()">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span slot="title">{{item1.authName}}</span>
@@ -69,7 +74,7 @@
 export default {
   data() {
     return {
-      isSidebarNavCollapse:true,
+      isSidebarNavCollapse: true,
       isCollapse: false,
       menus: [
         {
@@ -119,16 +124,16 @@ export default {
           path: "orders",
           children: [
             {
-              authName: "用户管理",
+              authName: "订单列表",
               id: 125,
               order: null,
-              path: "users"
+              path: "order"
             },
             {
-              authName: "用户管理",
+              authName: "数据分析",
               id: 125,
               order: null,
-              path: "users"
+              path: "orderData"
             }
           ]
         },
@@ -136,19 +141,25 @@ export default {
           authName: "数据管理",
           id: 128,
           order: 4,
-          path: "erports",
+          path: "report",
           children: [
             {
               authName: "用户数据",
               id: 125,
               order: null,
-              path: "users"
+              path: "report"
             },
             {
               authName: "数据图表",
-              id: 125,
+              id: 126,
               order: null,
-              path: "users"
+              path: "reportTwo"
+            },
+            {
+              authName: "数据图表",
+              id: 127,
+              order: null,
+              path: "reportThree"
             }
           ]
         },
@@ -169,17 +180,37 @@ export default {
               id: 152,
               order: null,
               path: "role"
+            },
+            {
+              authName: "测试",
+              id: 153,
+              order: null,
+              path: "text"
+            }
+          ]
+        },
+        {
+          authName: "操作日志",
+          id: 130,
+          order: 6,
+          path: "echarts",
+          children: [
+            {
+              authName: "操作日志",
+              id: 131,
+              order: null,
+              path: "echarts"
             }
           ]
         }
       ]
     };
   },
-   
+
   methods: {
-      toggleNavCollapse() {
-        this.isSidebarNavCollapse=false
-        },
+    toggleNavCollapse() {
+      this.isSidebarNavCollapse = false;
+    },
     // 获取 导航数据
     async getMenus() {
       const res = await this.$http.get(`menus`);
@@ -203,23 +234,26 @@ export default {
 <style lang="scss" scoped>
 .box {
   height: 100%;
-   .left {
-     .el-menu-vertical-demo{
-   background: linear-gradient(to bottom, rgb(154, 218, 230), rgb(194, 248, 252));
-     }
-   
+  .left {
+    .el-menu-vertical-demo {
+      background: linear-gradient(
+        to bottom,
+        rgb(154, 218, 230),
+        rgb(194, 248, 252)
+      );
     }
+  }
   .container {
     .hearder {
-     background: linear-gradient(to right, rgb(66, 233, 163), rgb(63, 176, 252));
-        border-bottom:1px solid #cccccc ;
-      }
-    // background: #999999;
+      background: linear-gradient(
+        to right,
+        rgb(66, 233, 163),
+        rgb(63, 176, 252)
+      );
+      border-bottom: 1px solid #cccccc;
+    }
     position: relative;
     .right {
-      .main {
-        // background: #f37c22;
-      }
       .footer {
         background: rgb(73, 73, 73);
         height: 40px !important;
@@ -244,13 +278,13 @@ export default {
 }
 .grid-content {
   color: #ffff;
-a{
-  color: #ffff;
-}
-img {
-  height: 100%;
-  display: inline-block;
-}
+  a {
+    color: #ffff;
+  }
+  img {
+    height: 100%;
+    display: inline-block;
+  }
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
