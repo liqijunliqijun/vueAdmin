@@ -15,7 +15,7 @@ export default {
 #app {
     height: 100%;
     > div {
-        height: 100%;
+        height: 100vh;
     }
 }
 </style>
